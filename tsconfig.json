@@ -1,0 +1,19 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "lib": ["dom", "es2017"],
+    "outDir": "./lib",
+    "strict": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "angularCompilerOptions": {
+    "debug": false,
+    "genDir": "src/ngfactory"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.custom.ts"]
+}
