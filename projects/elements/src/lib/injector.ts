@@ -20,6 +20,9 @@ import { fromPromise } from "rxjs/observable/fromPromise";
 import { forkJoin } from "rxjs";
 initDomAdapter();
 
+// 定义全局对象
+(<any>window).iwe7 = (<any>window).iwe7 || {};
+
 export class ElementInjector implements Injector {
   get(token: any, notFoundValue?: any): any {
     switch (token) {
@@ -83,19 +86,33 @@ export function createAotElements(
   let appModuleRef = appModuleFactory.create(parentInjector);
   // 子
   let moduleRef = moduleFactory.create(appModuleRef.injector);
-  let instance = moduleRef.instance;
-  let allComponent = instance.getElements();
+  let componentFactoryResolver = moduleRef.componentFactoryResolver;
+  let moduleType = moduleFactory.moduleType;
+  let decorators = (<any>moduleType).decorators;
   let obsers: any[] = [];
-  allComponent.map((res: any) => {
-    customElements.define(
-      res.selector,
-      createCustomElement(res.component, {
-        injector: moduleRef.injector
-      })
-    );
-    obsers.push(fromPromise(customElements.whenDefined(res.selector)));
+  decorators.map((res: any) => {
+    let args = res.args;
+    args.map((arg: any) => {
+      let entryComponents = arg.entryComponents;
+      if (entryComponents) {
+        entryComponents.map((res: Type<any>) => {
+          let componentFactory = componentFactoryResolver.resolveComponentFactory(
+            res
+          );
+          customElements.define(
+            componentFactory.selector,
+            createCustomElement(componentFactory.componentType, {
+              injector: moduleRef.injector
+            })
+          );
+          obsers.push(
+            fromPromise(customElements.whenDefined(componentFactory.selector))
+          );
+        });
+      }
+    });
   });
-  (<any>window).loadModule$ = forkJoin(...obsers);
+  (<any>window).loadModules$ = forkJoin(...obsers);
 }
 
 // 单个解析
@@ -118,4 +135,29 @@ export function createAotElement(
       injector: moduleRef.injector
     })
   );
+}
+
+// 非element
+export function createComponent(
+  appModuleFactory: NgModuleFactory<any>,
+  moduleFactory: NgModuleFactory<any>,
+  componentFactory: ComponentFactory<any>,
+  parentInjector?: Injector
+) {}
+
+export function createModule(
+  appModuleFactory: NgModuleFactory<any>,
+  moduleFactory: NgModuleFactory<any>,
+  parentInjector?: Injector
+) {
+  // 主
+  parentInjector = parentInjector || elementInjector;
+  let appModuleRef = appModuleFactory.create(parentInjector);
+  let componentFactoryResolver = appModuleRef.componentFactoryResolver;
+  // 子
+  let moduleRef = moduleFactory.create(appModuleRef.injector);
+  let instance = moduleRef.instance;
+  let allComponent = instance.getElements();
+  let obsers: any[] = [];
+  allComponent.map((res: any) => {});
 }

@@ -23,11 +23,4 @@ import { RouterModule } from "@angular/router";
 })
 export class TestModule {
   ngDoBootstrap() {}
-  getElements() {
-    return [
-      { selector: "app-demo1-test1", component: AppTest1Component },
-      { selector: "app-demo1-test2", component: AppTest2Component },
-      { selector: "app-demo1-test3", component: AppTest3Component }
-    ];
-  }
 }
