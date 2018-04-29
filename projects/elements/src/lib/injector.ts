@@ -106,7 +106,13 @@ export function createAotElements(
             })
           );
           obsers.push(
-            fromPromise(customElements.whenDefined(componentFactory.selector))
+            fromPromise(
+              customElements
+                .whenDefined(componentFactory.selector)
+                .then((res: any) => {
+                  return componentFactory.selector;
+                })
+            )
           );
         });
       }

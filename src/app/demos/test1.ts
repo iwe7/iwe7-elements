@@ -19,6 +19,7 @@ export class AppTest1Component implements OnInit {
       script.src = "https://meepo.com.cn/elements/element2.js?t=7";
       script.onload = () => {
         loadModules$.subscribe((res: any) => {
+          console.log(res);
           let demo2Test1 = document.createElement("app-demo2-test1");
           let demo2Test2 = document.createElement("app-demo2-test2");
           let demo2Test3 = document.createElement("app-demo2-test3");
