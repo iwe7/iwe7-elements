@@ -11,24 +11,19 @@ yarn add iwe7-elements
   imports: [CommonModule, RouterModule.forChild([])],
   exports: [AppTest1Component, AppTest2Component, AppTest3Component],
   declarations: [AppTest1Component, AppTest2Component, AppTest3Component],
+  // 要导出的组件 添加到entryComponents
   entryComponents: [AppTest1Component, AppTest2Component, AppTest3Component],
   providers: []
 })
 export class TestModule {
   ngDoBootstrap() {}
-  // 导出所有需要单独打包成element的组件 格式为{select: **, component: Type<any>}
-  getElements() {
-    return [
-      { selector: "app-demo1-test1", component: AppTest1Component },
-      { selector: "app-demo1-test2", component: AppTest2Component },
-      { selector: "app-demo1-test3", component: AppTest3Component }
-    ];
-  }
 }
 ```
 
 ### webpack 要打包的文件
-- elements/element.ts
+
+* elements/element.ts
+
 ```ts
 import { AppModuleNgFactory } from "../lib/src/app/app.module.ngfactory";
 import { TestModuleNgFactory } from "../lib/src/app/demos/test.module.ngfactory";
@@ -36,7 +31,8 @@ import { createAotElements } from "iwe7-elements";
 createAotElements(AppModuleNgFactory, TestModuleNgFactory);
 ```
 
-### webpack配置
+### webpack 配置
+
 ```ts
 const path = require("path");
 const glob = require("glob");
@@ -105,8 +101,11 @@ module.exports = {
   plugins: []
 };
 ```
-## 打包成element
-- tsconfig.json
+
+## 打包成 element
+
+* tsconfig.json
+
 ```json
 {
   "compileOnSave": true,
@@ -114,10 +113,7 @@ module.exports = {
     "baseUrl": "./",
     "target": "es5",
     "module": "es2015",
-    "lib": [
-      "dom",
-      "es2017"
-    ],
+    "lib": ["dom", "es2017"],
     "outDir": "./lib",
     "strict": true,
     "moduleResolution": "node",
@@ -125,35 +121,31 @@ module.exports = {
     "emitDecoratorMetadata": true,
     "allowJs": true,
     "paths": {
-      "elements/*": [
-        "projects/elements/src/public_api.ts"
-      ]
+      "elements/*": ["projects/elements/src/public_api.ts"]
     }
   },
   "angularCompilerOptions": {
     "debug": false,
     "genDir": "src/ngfactory"
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "src/**/*.custom.ts"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.custom.ts"]
 }
 ```
-- package.sjon
+
+* package.sjon
+
 ```json
 {
   "webpack": "ngc -p tsconfig.json && webpack -p"
 }
 ```
-- 运行webpack
+
+* 运行 webpack
+
 ```ts
 yarn webpack
 ```
-
-
 
 ```ts
 // 加载成功后回调
