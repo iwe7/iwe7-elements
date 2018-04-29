@@ -16,6 +16,8 @@ import {
   ɵinitDomAdapter as initDomAdapter
 } from "@angular/platform-browser";
 
+import { fromPromise } from "rxjs/observable/fromPromise";
+import { forkJoin } from "rxjs";
 initDomAdapter();
 
 export class ElementInjector implements Injector {
@@ -83,6 +85,7 @@ export function createAotElements(
   let moduleRef = moduleFactory.create(appModuleRef.injector);
   let instance = moduleRef.instance;
   let allComponent = instance.getElements();
+  let obsers: any[] = [];
   allComponent.map((res: any) => {
     customElements.define(
       res.selector,
@@ -90,7 +93,9 @@ export function createAotElements(
         injector: moduleRef.injector
       })
     );
+    obsers.push(fromPromise(customElements.whenDefined(res.selector)));
   });
+  (<any>window).loadModule$ = forkJoin(...obsers);
 }
 
 // 单个解析

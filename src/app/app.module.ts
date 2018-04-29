@@ -5,7 +5,6 @@ import { APP_BASE_HREF } from "@angular/common";
 import { AppComponent } from "./app.component";
 import { RouterModule } from "@angular/router";
 
-import * as Elements from 'elements';
 
 @NgModule({
   declarations: [AppComponent],
