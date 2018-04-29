@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 module.exports = {
   entry: {
-    "app-root1": "./lib/src/main.js",
+    "app-root1": "./element.ts",
     angular: ["@angular/core"],
     polyfills: ["./lib/src/polyfills.js"]
   },
@@ -25,7 +25,13 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      chunks: "all",
+      chunks: "async",
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: "~",
+      name: true,
       cacheGroups: {
         commons: {
           name: "angular"

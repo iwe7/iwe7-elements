@@ -1,19 +1,33 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "es5",
     "module": "es2015",
-    "lib": ["dom", "es2017"],
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "outDir": "./lib",
     "strict": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
+    "paths": {
+      "elements/*": [
+        "projects/elements/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "debug": false,
     "genDir": "src/ngfactory"
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/**/*.custom.ts"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.custom.ts"
+  ]
 }
