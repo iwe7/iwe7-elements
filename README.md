@@ -21,7 +21,7 @@ export class TestModule {}
 ```ts
 // 打包主程序
 iwe7 m 
-// 打包插件
+// 打包插件/模块
 iwe7 e
 ```
 
