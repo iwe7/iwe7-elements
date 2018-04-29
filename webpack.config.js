@@ -3,9 +3,15 @@ const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 module.exports = {
   entry: {
-    "demo1": "./element.ts",
-    "demo2": "./element2.ts",
-    angular: ["@angular/core"],
+    demo1: "./element.ts",
+    demo2: "./element2.ts",
+    angular: [
+      "@angular/core",
+      "@angular/platform-browser",
+      "@angular/common",
+      "@angular/common/http",
+      "@angular/router"
+    ],
     polyfills: ["./lib/src/polyfills.js"]
   },
   output: {
@@ -35,7 +41,9 @@ module.exports = {
       name: true,
       cacheGroups: {
         commons: {
-          name: "angular"
+          name: "angular",
+          chunks: "initial",
+          minChunks: 2
         }
       }
     }

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Injector } from "@angular/core";
 import { Observable } from "rxjs";
 
 let map = new Map();
@@ -24,7 +24,11 @@ map.set("app-root5", "https://meepo.com.cn/elements/modules/module5/main.js");
 export class AppComponent {
   title = "app";
 
-  constructor() {}
+  constructor(
+    public injector: Injector
+  ) {
+    console.log(this.injector);
+  }
 
   ngOnInit() {
     this.title = (<any>window).selector;

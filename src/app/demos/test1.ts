@@ -6,6 +6,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class AppTest1Component implements OnInit {
   hasLoad: boolean = false;
+
   constructor() {}
 
   ngOnInit() {}
@@ -13,14 +14,16 @@ export class AppTest1Component implements OnInit {
   load() {
     if (!this.hasLoad) {
       let script = document.createElement("script");
-      script.src = "https://meepo.com.cn/elements/demo2.js";
+      script.src = "https://meepo.com.cn/elements/demo2.js?t=5";
       script.onload = () => {
-        let demo2Test1 = document.createElement("app-demo2-test1");
-        let demo2Test2 = document.createElement("app-demo2-test2");
-        let demo2Test3 = document.createElement("app-demo2-test3");
-        document.body.appendChild(demo2Test1);
-        document.body.appendChild(demo2Test2);
-        document.body.appendChild(demo2Test3);
+        setTimeout(() => {
+          let demo2Test1 = document.createElement("app-demo2-test1");
+          let demo2Test2 = document.createElement("app-demo2-test2");
+          let demo2Test3 = document.createElement("app-demo2-test3");
+          document.body.appendChild(demo2Test1);
+          document.body.appendChild(demo2Test2);
+          document.body.appendChild(demo2Test3);
+        }, 300);
       };
       document.head.appendChild(script);
       this.hasLoad = true;
