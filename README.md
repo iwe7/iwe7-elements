@@ -27,12 +27,12 @@ export class TestModule {
 }
 ```
 
-### webpack 打包
+### webpack 要打包的文件
 - elements/element.ts
 ```ts
 import { AppModuleNgFactory } from "../lib/src/app/app.module.ngfactory";
 import { TestModuleNgFactory } from "../lib/src/app/demos/test.module.ngfactory";
-import { createAotElements } from "../projects/elements/src/public_api";
+import { createAotElements } from "iwe7-elements";
 createAotElements(AppModuleNgFactory, TestModuleNgFactory);
 ```
 
@@ -43,7 +43,7 @@ const glob = require("glob");
 
 const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-// 打包文件存放目录
+// 打包文件存放目录 /elements/*.ts
 let entries = glob.sync("./elements/*.ts");
 let newEntries = [];
 
@@ -54,8 +54,6 @@ entries.map(res => {
   newPath = path.replace(".ts", "");
   newEntries[newPath] = res;
 });
-
-console.log(newEntries);
 
 module.exports = {
   entry: {
@@ -150,6 +148,7 @@ module.exports = {
   "webpack": "ngc -p tsconfig.json && webpack -p"
 }
 ```
+- 运行webpack
 ```ts
 yarn webpack
 ```
