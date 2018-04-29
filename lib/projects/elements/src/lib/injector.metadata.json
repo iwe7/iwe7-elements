@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":4,"metadata":{"ElementInjector":{"__symbolic":"class","members":{"get":[{"__symbolic":"method"}]}},"elementInjector":{"__symbolic":"new","expression":{"__symbolic":"reference","name":"ElementInjector"}},"getModuleInjector":{"__symbolic":"function"},"createElement":{"__symbolic":"function"}}}]

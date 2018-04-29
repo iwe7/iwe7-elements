@@ -1,6 +1,16 @@
-import { Injector, NgZone, PLATFORM_ID, NgModuleFactory } from "@angular/core";
+import {
+  Injector,
+  NgZone,
+  PLATFORM_ID,
+  NgModuleFactory,
+  Compiler,
+  Type,
+  ModuleWithComponentFactories,
+  ComponentFactory
+} from "@angular/core";
 import { ɵPLATFORM_BROWSER_ID as PLATFORM_BROWSER_ID } from "@angular/common";
 import { DOCUMENT, PlatformLocation } from "@angular/common";
+import { createCustomElement } from "@angular/elements";
 import {
   ɵBrowserPlatformLocation as BrowserPlatformLocation,
   ɵinitDomAdapter as initDomAdapter
@@ -19,6 +29,8 @@ export class ElementInjector implements Injector {
         return new NgZone({
           enableLongStackTrace: false
         });
+      case Compiler:
+        return new Compiler();
       case DOCUMENT:
         return document;
       default:
@@ -29,6 +41,76 @@ export class ElementInjector implements Injector {
 
 export const elementInjector = new ElementInjector();
 
-export function getRootInjector(AppModuleNgFactory: NgModuleFactory<any>) {
+// 运行时
+export function getJitModuleInjector(appModule: Type<any>) {
+  let compiler: Compiler = elementInjector.get(Compiler);
+  let AppModuleNgFactory = compiler.compileModuleSync(appModule);
   return AppModuleNgFactory.create(elementInjector).injector;
+}
+
+export function createJitElement(
+  ngModule: Type<any>,
+  parentInjector: Injector
+) {
+  let compiler: Compiler = elementInjector.get(Compiler);
+  let moduleWithComponentFactories: ModuleWithComponentFactories<
+    any
+  > = compiler.compileModuleAndAllComponentsSync(ngModule);
+  let componentFactorys: ComponentFactory<any>[] =
+    moduleWithComponentFactories.componentFactories;
+  let ngModuleFactory: NgModuleFactory<any> =
+    moduleWithComponentFactories.ngModuleFactory;
+  componentFactorys.map((res: ComponentFactory<any>) => {
+    customElements.define(
+      res.selector,
+      createCustomElement(res.componentType, {
+        injector: ngModuleFactory.create(parentInjector).injector
+      })
+    );
+  });
+}
+
+// 批量解析
+export function createAotElements(
+  appModuleFactory: NgModuleFactory<any>,
+  moduleFactory: NgModuleFactory<any>,
+  parentInjector?: Injector
+) {
+  // 主
+  parentInjector = parentInjector || elementInjector;
+  let appModuleRef = appModuleFactory.create(parentInjector);
+  // 子
+  let moduleRef = moduleFactory.create(appModuleRef.injector);
+  let instance = moduleRef.instance;
+  let allComponent = instance.getElements();
+  allComponent.map((res: any) => {
+    customElements.define(
+      res.selector,
+      createCustomElement(res.component, {
+        injector: moduleRef.injector
+      })
+    );
+  });
+}
+
+// 单个解析
+export function createAotElement(
+  appModuleFactory: NgModuleFactory<any>,
+  moduleFactory: NgModuleFactory<any>,
+  componentFactory: ComponentFactory<any>,
+  parentInjector?: Injector
+) {
+  // 主
+  parentInjector = parentInjector || elementInjector;
+  let appModuleRef = appModuleFactory.create(parentInjector);
+  // 子
+  let moduleRef = moduleFactory.create(appModuleRef.injector);
+  let instance = moduleRef.instance;
+  let allComponent = instance.getElements();
+  customElements.define(
+    componentFactory.selector,
+    createCustomElement(componentFactory.componentType, {
+      injector: moduleRef.injector
+    })
+  );
 }

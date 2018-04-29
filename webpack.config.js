@@ -1,10 +1,25 @@
 const path = require("path");
+const glob = require("glob");
+
 const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
+let entries = glob.sync("./elements/*.ts");
+let newEntries = [];
+
+entries.map(res => {
+  let name = res.split("/");
+  let path = name[name.length - 1];
+  let newPath = path.replace(".", "");
+  newPath = path.replace(".ts", "");
+  newEntries[newPath] = res;
+});
+
+console.log(newEntries);
+
 module.exports = {
   entry: {
-    demo1: "./element.ts",
-    demo2: "./element2.ts",
+    ...newEntries,
     angular: [
       "@angular/core",
       "@angular/platform-browser",

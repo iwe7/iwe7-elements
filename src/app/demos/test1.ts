@@ -14,7 +14,7 @@ export class AppTest1Component implements OnInit {
   load() {
     if (!this.hasLoad) {
       let script = document.createElement("script");
-      script.src = "https://meepo.com.cn/elements/demo2.js?t=5";
+      script.src = "https://meepo.com.cn/elements/element2.js?t=7";
       script.onload = () => {
         setTimeout(() => {
           let demo2Test1 = document.createElement("app-demo2-test1");
