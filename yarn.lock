@@ -4383,9 +4383,9 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
-iwe7-elements@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/iwe7-elements/-/iwe7-elements-0.0.5.tgz#2bf5cc6587578b8b0057ab2347a2144f7c2662be"
+iwe7-elements@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/iwe7-elements/-/iwe7-elements-0.0.9.tgz#43800ad0bfbf5012bb4f12f2e9c39cde1ee2ce77"
   dependencies:
     tslib "^1.9.0"
 
