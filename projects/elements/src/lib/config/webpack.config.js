@@ -4,7 +4,7 @@ const glob = require("glob");
 const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
-let entries = glob.sync("./elements/*.ts");
+let entries = glob.sync(path.resolve(__dirname, "elements/*.ts"));
 let newEntries = [];
 
 entries.map(res => {
@@ -25,10 +25,10 @@ module.exports = {
       "@angular/common/http",
       "@angular/router"
     ],
-    polyfills: ["./.tmp/src/polyfills.js"]
+    polyfills: ["./lib/src/polyfills.js"]
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "public"),
     filename: "[name].js"
   },
   module: {
@@ -61,10 +61,5 @@ module.exports = {
       }
     }
   },
-  plugins: [],
-  devServer: {
-    contentBase: "./dist",
-    hot: false,
-    port: 3000
-  }
+  plugins: []
 };
