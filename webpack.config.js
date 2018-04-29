@@ -3,7 +3,8 @@ const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 module.exports = {
   entry: {
-    "app-root1": "./element.ts",
+    "demo1": "./element.ts",
+    "demo2": "./element2.ts",
     angular: ["@angular/core"],
     polyfills: ["./lib/src/polyfills.js"]
   },
