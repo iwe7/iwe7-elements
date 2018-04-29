@@ -16,7 +16,8 @@
     "webpack": "webpack -p",
     "iwe7": "node projects/elements/src/lib/cli.js",
     "nh": "ngc -p projects/elements/src/lib/config/tsconfig.json",
-    "test2": "webpack -p test=/Volumes/meepo/nx/iwe7-elements/.tmp/src/app/element.test.js test2=/Volumes/meepo/nx/iwe7-elements/.tmp/src/app/element.test2.js  --output-path=/Volumes/meepo/nx/iwe7-elements/dist/addons"
+    "main": "iwe7 m",
+    "element": "iwe7 e"
   },
   "private": true,
   "dependencies": {

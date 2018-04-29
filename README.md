@@ -17,18 +17,15 @@ yarn add iwe7-elements
 })
 export class TestModule {}
 ```
-- cli
-```ts
-// 打包主程序
-iwe7 m 
-// 打包插件/模块
-iwe7 e
-```
 
-* 运行 webpack
-
-```ts
-yarn webpack
+* 配置cli到package.json
+```json
+"scripts": {
+  // 打包主程序
+  "main": "iwe7 m",
+  // 打包插件/模块
+  "element": "iwe7 e"
+}
 ```
 
 ```ts
