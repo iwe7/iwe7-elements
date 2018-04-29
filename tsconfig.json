@@ -16,7 +16,7 @@
     "allowJs": true,
     "paths": {
       "elements/*": [
-        "projects/elements/*"
+        "projects/elements/src/public_api.ts"
       ]
     }
   },
