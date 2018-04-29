@@ -1,23 +1,9 @@
 const path = require("path");
-const glob = require("glob");
-
 const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-
-let entries = glob.sync(path.resolve(__dirname, "elements/*.ts"));
-let newEntries = [];
-
-entries.map(res => {
-  let name = res.split("/");
-  let path = name[name.length - 1];
-  let newPath = path.replace(".", "");
-  newPath = path.replace(".ts", "");
-  newEntries[newPath] = res;
-});
-
 module.exports = {
   entry: {
-    ...newEntries,
+    app: "./.tmp/src/app/element.app.js",
     angular: [
       "@angular/core",
       "@angular/platform-browser",
@@ -25,10 +11,10 @@ module.exports = {
       "@angular/common/http",
       "@angular/router"
     ],
-    polyfills: ["./lib/src/polyfills.js"]
+    polyfills: ["./.tmp/src/polyfills.js"]
   },
   output: {
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "dist"),
     filename: "[name].js"
   },
   module: {
@@ -61,5 +47,10 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [],
+  devServer: {
+    contentBase: "./dist",
+    hot: false,
+    port: 3000
+  }
 };

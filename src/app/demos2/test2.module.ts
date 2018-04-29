@@ -11,7 +11,7 @@ import { AppTest3Component } from "./test3";
   entryComponents: [AppTest1Component, AppTest2Component, AppTest3Component],
   providers: []
 })
-export class TestModule {
+export class Test2Module {
   getElements() {
     return [
       { selector: "app-demo2-test1", component: AppTest1Component },

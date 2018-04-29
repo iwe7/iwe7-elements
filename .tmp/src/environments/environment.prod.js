@@ -1,3 +1,4 @@
 export var environment = {
-    production: true
+    production: true,
+    hmr: true
 };

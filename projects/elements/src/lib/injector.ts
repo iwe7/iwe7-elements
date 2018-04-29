@@ -78,10 +78,11 @@ export function createJitElement(
 // 批量解析
 export function createAotElements(
   appModuleFactory: NgModuleFactory<any>,
-  moduleFactory: NgModuleFactory<any>,
+  moduleFactory?: NgModuleFactory<any>,
   parentInjector?: Injector
 ) {
   // 主
+  moduleFactory = moduleFactory || appModuleFactory;
   parentInjector = parentInjector || elementInjector;
   let appModuleRef = appModuleFactory.create(parentInjector);
   // 子

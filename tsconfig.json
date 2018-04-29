@@ -8,7 +8,7 @@
       "dom",
       "es2017"
     ],
-    "outDir": "./lib",
+    "outDir": "./.tmp",
     "strict": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
