@@ -25,6 +25,6 @@ export function View_AppComponent_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(
         var pd_0 = (_co.load("app-root5") !== false);
         ad = (pd_0 && ad);
     } return ad; }, null, null)), (_l()(), i0.ɵted(-1, null, ["\u52A0\u8F7D\u6A21\u57575"]))], null, function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.title; _ck(_v, 1, 0, currVal_0); }); }
-export function View_AppComponent_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 1, "app-root1", [], null, null, null, View_AppComponent_0, RenderType_AppComponent)), i0.ɵdid(1, 114688, null, 0, i1.AppComponent, [i0.Injector], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
-var AppComponentNgFactory = i0.ɵccf("app-root1", i1.AppComponent, View_AppComponent_Host_0, {}, {}, []);
+export function View_AppComponent_Host_0(_l) { return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, 0, null, null, 1, "app-root", [], null, null, null, View_AppComponent_0, RenderType_AppComponent)), i0.ɵdid(1, 114688, null, 0, i1.AppComponent, [i0.Injector], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
+var AppComponentNgFactory = i0.ɵccf("app-root", i1.AppComponent, View_AppComponent_Host_0, {}, {}, []);
 export { AppComponentNgFactory as AppComponentNgFactory };

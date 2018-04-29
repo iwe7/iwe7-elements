@@ -1,4 +1,3 @@
-
 let { exec } = require("child_process");
 let path = require("path");
 let glob = require("glob");
@@ -14,7 +13,9 @@ function ucFirst(word) {
 let webpackConfig = fs.readFileSync(basePath + "/../config/webpack.config.js");
 
 module.exports = webpack = ({ source, pre, out, isMain }) => {
-  fs.mkdir(source + '/' + out);
+  fs.mkdir(source + "/" + out, () => {
+    console.log("begin");
+  });
   fs.writeFileSync(source + "/webpack.config.js", webpackConfig);
   // 编译完成后 webpack打包
   let files = [];
@@ -88,7 +89,7 @@ function createIndexHtml(source, out) {
 </head>
 
 <body>
-<app-demo1-test1></app-demo1-test1>
+<app-root></app-root>
 <script src="./polyfills.js?t=${time}"></script>
 <script src="./angular.js?t=${time}"></script>
 <script src="./app.js?t=${time}"></script>

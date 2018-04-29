@@ -9,11 +9,9 @@ map.set("app-root4", "https://meepo.com.cn/elements/modules/module4/main.js");
 map.set("app-root5", "https://meepo.com.cn/elements/modules/module5/main.js");
 
 @Component({
-  selector: "app-root1",
+  selector: "app-root",
   template: `
-
     <h2>{{title}}</h2>
-
     <button (click)="load('app-root1')">加载模块1</button>
     <button (click)="load('app-root2')">加载模块2</button>
     <button (click)="load('app-root3')">加载模块3</button>

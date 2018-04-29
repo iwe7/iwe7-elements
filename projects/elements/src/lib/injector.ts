@@ -82,13 +82,20 @@ export function createAotElements(
   parentInjector?: Injector
 ) {
   // 主
-  moduleFactory = moduleFactory || appModuleFactory;
   parentInjector = parentInjector || elementInjector;
   let appModuleRef = appModuleFactory.create(parentInjector);
+  let moduleRef: any;
+  let moduleType: any;
+  if (moduleFactory) {
+    moduleRef = moduleFactory.create(appModuleRef.injector);
+    moduleType = moduleFactory.moduleType;
+  } else {
+    moduleRef = appModuleRef;
+    moduleType = appModuleFactory.moduleType;
+  }
+
   // 子
-  let moduleRef = moduleFactory.create(appModuleRef.injector);
   let componentFactoryResolver = moduleRef.componentFactoryResolver;
-  let moduleType = moduleFactory.moduleType;
   let decorators = (<any>moduleType).decorators;
   let obsers: any[] = [];
   decorators.map((res: any) => {
