@@ -21,9 +21,9 @@ export class TestModule {}
 * 配置cli到package.json
 ```json
 "scripts": {
-  // 打包主程序
+  ## 打包主程序
   "main": "iwe7 m",
-  // 打包插件/模块
+  ## 打包插件/模块
   "element": "iwe7 e"
 }
 ```
