@@ -1,4 +1,4 @@
-配合[iwe7-elements](https://github.com/iwe7/iwe7-books)可以进行发布前调试预览等工作!
+配合[iwe7-elements](https://github.com/iwe7/iwe7-books)可以进行调试或快速查看模块导出组件详情!
 
 
 ## install
