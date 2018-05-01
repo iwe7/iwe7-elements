@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 readonly currentDir=$(cd $(dirname $0); pwd)
 cd ${currentDir}
-
+rm -rf dist
 git add .
 git commit -m '更新'
 git push origin master
