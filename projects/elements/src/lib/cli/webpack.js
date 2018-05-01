@@ -34,60 +34,46 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
       createAotElements(AppModuleNgFactory);
     `;
   fs.writeFileSync(fullPath, content);
-  isMain = false;
-  if (isMain) {
-    // exec
-    let cmd = `${source}/node_modules/.bin/webpack -p`;
-    exec(cmd, err => {
-      if (err) {
-        console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
-      } else {
-        exec("rm -rf " + source + "/.tmp");
-      }
+  entries.map(entrie => {
+    let pathArrs = entrie.split("/");
+    let ngfactoryPath = entrie.replace(".ts", ".ngfactory.js");
+    ngfactoryPath = ngfactoryPath.replace(source + "/src/app/", "./");
+    let pathName = pathArrs[pathArrs.length - 1];
+    let moduleName = pathName.replace(".module.ts", "");
+    // 转换-
+    moduleNames = moduleName.split("-");
+    model = "";
+    moduleNames.map(res => {
+      model += ucFirst(res);
     });
-  } else {
-    entries.map(entrie => {
-      let pathArrs = entrie.split("/");
-      let ngfactoryPath = entrie.replace(".ts", ".ngfactory.js");
-      ngfactoryPath = ngfactoryPath.replace(source + "/src/app/", "./");
-      let pathName = pathArrs[pathArrs.length - 1];
-      let moduleName = pathName.replace(".module.ts", "");
-      // 转换-
-      moduleNames = moduleName.split("-");
-      model = "";
-      moduleNames.map(res => {
-        model += ucFirst(res);
-      });
-      let fullPath = source + "/.tmp/src/app/element." + moduleName + ".js";
-      let content = `
+    let fullPath = source + "/.tmp/src/app/element." + moduleName + ".js";
+    let content = `
         import { AppModuleNgFactory } from "./app.module.ngfactory";
         import { ${ucFirst(model)}ModuleNgFactory } from "${ngfactoryPath}";
         import { createAotElements } from "iwe7-elements";
         createAotElements(AppModuleNgFactory, TestModuleNgFactory);
       `;
-      fs.writeFileSync(fullPath, content);
-      // .replace(source + "/", "./")
-      files.push({
-        name: model,
-        path: "./.tmp/src/app/element." + moduleName + ".js"
-      });
+    fs.writeFileSync(fullPath, content);
+    // .replace(source + "/", "./")
+    files.push({
+      name: model,
+      path: "./.tmp/src/app/element." + moduleName + ".js"
     });
-
-    let entrysContent = `module.exports = entrys = {`;
-    files.map(res => {
-      entrysContent += `${res.name}:"${res.path}"`;
-    });
-    entrysContent += `};`;
-    fs.writeFileSync(source + "/entrys/index.js", entrysContent);
-    let cmd = `${source}/node_modules/.bin/webpack -p `;
-    exec(cmd, err => {
-      if (err) {
-        console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
-      } else {
-        exec("rm -rf " + source + "/.tmp");
-      }
-    });
-  }
+  });
+  let entrysContent = `module.exports = entrys = {`;
+  files.map(res => {
+    entrysContent += `${res.name}:"${res.path}"`;
+  });
+  entrysContent += `};`;
+  fs.writeFileSync(source + "/entrys/index.js", entrysContent);
+  let cmd = `${source}/node_modules/.bin/webpack -p `;
+  exec(cmd, err => {
+    if (err) {
+      console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
+    } else {
+      exec("rm -rf " + source + "/.tmp");
+    }
+  });
 };
 
 function createIndexHtml(source, out) {
