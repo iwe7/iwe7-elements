@@ -76,11 +76,11 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
       cmdStr += `${item.name}=${item.path} `;
     });
 
-    let entrysContent = `module.exports = entrys = [`;
+    let entrysContent = `module.exports = entrys = {`;
     files.map(res => {
       entrysContent += `${res.name}:"${res.path}"`;
     });
-    entrysContent += `];`;
+    entrysContent += `};`;
     fs.writeFileSync(source + "/entrys/index.js", entrysContent);
     let cmd = `${source}/node_modules/.bin/webpack -p `;
     exec(cmd, err => {
