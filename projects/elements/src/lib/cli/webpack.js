@@ -41,7 +41,7 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
     let pathName = pathArrs[pathArrs.length - 1];
     let moduleName = pathName.replace(".module.ts", "");
     if (moduleName === "app") {
-      retunr;
+      return ;
     }
     // 转换-
     moduleNames = moduleName.split("-");
