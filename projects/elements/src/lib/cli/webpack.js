@@ -40,6 +40,9 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
     ngfactoryPath = ngfactoryPath.replace(source + "/src/app/", "./");
     let pathName = pathArrs[pathArrs.length - 1];
     let moduleName = pathName.replace(".module.ts", "");
+    if (moduleName === "app") {
+      retunr;
+    }
     // 转换-
     moduleNames = moduleName.split("-");
     model = "";
