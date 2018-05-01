@@ -9,6 +9,8 @@ let webpack = require("./webpack.js");
 module.exports = element = ({ source, pre, out }) => {
   tsconfig.compilerOptions.baseUrl = source;
   tsconfig.compilerOptions.outDir = source + "/.tmp";
+  tsconfig.compilerOptions.strict = false;
+
   tsconfig.include = [source + "/src/**/*"];
   tsconfig.exclude = [source + "/src/**/*.custom.ts"];
   fs.writeFileSync(tsconfigPath, JSON.stringify(tsconfig));
@@ -17,7 +19,7 @@ module.exports = element = ({ source, pre, out }) => {
     `${source}/node_modules/.bin/ngc -p ${basePath}/../config/tsconfig.json`,
     err => {
       if (err) {
-        console.log("发生了点错误，请联系作者处理，QQ：1037483576");
+        console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
       } else {
         // 编译完成后 webpack打包
         let isMain = false;

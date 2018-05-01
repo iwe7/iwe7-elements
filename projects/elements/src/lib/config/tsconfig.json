@@ -1,1 +1,18 @@
-{"compileOnSave":true,"compilerOptions":{"baseUrl":"/Volumes/meepo/nx/iwe7-elements","target":"es5","module":"es2015","lib":["dom","es2017"],"outDir":"/Volumes/meepo/nx/iwe7-elements/.tmp","strict":true,"moduleResolution":"node","experimentalDecorators":true,"emitDecoratorMetadata":true,"allowJs":true},"angularCompilerOptions":{"debug":false,"genDir":"./src/ngfactory"},"include":["/Volumes/meepo/nx/iwe7-elements/src/**/*"],"exclude":["/Volumes/meepo/nx/iwe7-elements/src/**/*.custom.ts"]}
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "baseUrl": "/Volumes/meepo/nx/iwe7-elements",
+    "target": "es5",
+    "module": "es2015",
+    "lib": ["dom", "es2017"],
+    "outDir": "/Volumes/meepo/nx/iwe7-elements/.tmp",
+    "strict": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true
+  },
+  "angularCompilerOptions": { "debug": false, "genDir": "./src/ngfactory" },
+  "include": ["/Volumes/meepo/nx/iwe7-elements/src/**/*"],
+  "exclude": ["/Volumes/meepo/nx/iwe7-elements/src/**/*.custom.ts"]
+}

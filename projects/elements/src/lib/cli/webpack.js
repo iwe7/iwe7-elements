@@ -48,15 +48,19 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
       ngfactoryPath = ngfactoryPath.replace(source + "/src/app/", "./");
       let pathName = pathArrs[pathArrs.length - 1];
       let moduleName = pathName.replace(".module.ts", "");
+      // 转换-
+      moduleNames = moduleName.split("-");
+      model = "";
+      moduleNames.map(res => {
+        model += ucFirst(res);
+      });
       let fullPath = source + "/.tmp/src/app/element." + moduleName + ".js";
       if (moduleName === "app") {
         return "";
       }
       let content = `
         import { AppModuleNgFactory } from "./app.module.ngfactory";
-        import { ${ucFirst(
-          moduleName
-        )}ModuleNgFactory } from "${ngfactoryPath}";
+        import { ${ucFirst(model)}ModuleNgFactory } from "${ngfactoryPath}";
         import { createAotElements } from "iwe7-elements";
         createAotElements(AppModuleNgFactory, TestModuleNgFactory);
       `;
