@@ -54,7 +54,7 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
         import { AppModuleNgFactory } from "./app.module.ngfactory";
         import { ${ucFirst(model)}ModuleNgFactory } from "${ngfactoryPath}";
         import { createAotElements } from "iwe7-elements";
-        createAotElements(AppModuleNgFactory, TestModuleNgFactory);
+        createAotElements(AppModuleNgFactory, ${ucFirst(model)}ModuleNgFactory);
       `;
     fs.writeFileSync(fullPath, content);
     // .replace(source + "/", "./")
