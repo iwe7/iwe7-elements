@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const entrys = require("./entrys/index.js");
+const entrys = require('./entrys/index');
 module.exports = {
   entry: {
     app: "./.tmp/src/app/element.app.js",
@@ -12,6 +12,8 @@ module.exports = {
       "@angular/common",
       "@angular/common/http",
       "@angular/router",
+      "@angular/elements",
+      "iwe7-elements",
       "rxjs"
     ],
     polyfills: ["./.tmp/src/polyfills.js"]

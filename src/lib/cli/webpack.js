@@ -36,7 +36,7 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
       `;
     fs.writeFileSync(fullPath, content);
     // exec
-    let cmd = `${source}/node_modules/.bin/webpack -p`;
+    let cmd = `${source}/node_modules/.bin/webpack -p --config=webpack.config.js`;
     exec(cmd, err => {
       if (err) {
         console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
@@ -75,14 +75,17 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
     files.map(item => {
       cmdStr += `${item.name}=${item.path} `;
     });
-
-    let entrysContent = `module.exports = entrys = [`;
-    files.map(res => {
-      entrysContent += `${res.name}:"${res.path}"`;
+    let content = `
+    module.exports = entrys = {
+    `;
+    files.map(item => {
+      content += `${item.name}: "${item.path}",`;
     });
-    entrysContent += `];`;
-    fs.writeFileSync(source + "/entrys/index.js", entrysContent);
+    content += "};";
+    fs.writeFileSync(source + "/entrys/index.js", content);
+    // cmdStr += `angular=[@angular/core,@angular/platform-browser,@angular/common,@angular/common/http,@angular/router,@angular/elements,iwe7-elements,rxjs]`;
     let cmd = `${source}/node_modules/.bin/webpack -p `;
+    console.log(cmd);
     exec(cmd, err => {
       if (err) {
         console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
