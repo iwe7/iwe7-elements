@@ -12,6 +12,9 @@ module.exports = {
       "@angular/common",
       "@angular/common/http",
       "@angular/router",
+      "@angular/elements",
+      "@angular/forms",
+      "iwe7-elements",
       "rxjs"
     ],
     polyfills: ["./.tmp/src/polyfills.js"]
