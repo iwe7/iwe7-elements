@@ -67,11 +67,10 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
       `;
       fs.writeFileSync(fullPath, content);
       // .replace(source + "/", "./")
-      files.push({ name: model, path: fullPath });
-    });
-    let cmdStr = "";
-    files.map(item => {
-      cmdStr += `${item.name}=${item.path} `;
+      files.push({
+        name: model,
+        path: "./.tmp/src/app/element." + moduleName + ".js"
+      });
     });
 
     let entrysContent = `module.exports = entrys = {`;
