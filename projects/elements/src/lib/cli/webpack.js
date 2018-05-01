@@ -23,18 +23,19 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
   // 编译完成后 webpack打包
   let files = [];
   let entries = glob.sync(path.resolve(source, "src/**/*.module.ts"));
+  createIndexHtml(source, out);
+  // app.js
+  let moduleName = "app";
+  let fullPath = source + "/.tmp/src/app/element.app.js";
+  let ngfactoryPath = source + "/.tmp/src/app/app.module.ngfactory.js";
+  let content = `
+      import { AppModuleNgFactory } from "./app.module.ngfactory";
+      import { createAotElements } from "iwe7-elements";
+      createAotElements(AppModuleNgFactory);
+    `;
+  fs.writeFileSync(fullPath, content);
+  isMain = false;
   if (isMain) {
-    createIndexHtml(source, out);
-    // app.js
-    let moduleName = "app";
-    let fullPath = source + "/.tmp/src/app/element.app.js";
-    let ngfactoryPath = source + "/.tmp/src/app/app.module.ngfactory.js";
-    let content = `
-        import { AppModuleNgFactory } from "./app.module.ngfactory";
-        import { createAotElements } from "iwe7-elements";
-        createAotElements(AppModuleNgFactory);
-      `;
-    fs.writeFileSync(fullPath, content);
     // exec
     let cmd = `${source}/node_modules/.bin/webpack -p`;
     exec(cmd, err => {
@@ -58,9 +59,6 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
         model += ucFirst(res);
       });
       let fullPath = source + "/.tmp/src/app/element." + moduleName + ".js";
-      if (moduleName === "app") {
-        return "";
-      }
       let content = `
         import { AppModuleNgFactory } from "./app.module.ngfactory";
         import { ${ucFirst(model)}ModuleNgFactory } from "${ngfactoryPath}";
