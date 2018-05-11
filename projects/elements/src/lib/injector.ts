@@ -21,7 +21,7 @@ import { forkJoin } from "rxjs";
 initDomAdapter();
 
 // 定义全局对象
-(<any>window).iwe7 = (<any>window).iwe7 || {};
+(<any>window).iwe7 = (<any>window).iwe7 || new Map();
 
 export class ElementInjector implements Injector {
   get(token: any, notFoundValue?: any): any {
@@ -107,12 +107,11 @@ export function createAotElements(
           let componentFactory = componentFactoryResolver.resolveComponentFactory(
             res
           );
-          customElements.define(
-            componentFactory.selector,
-            createCustomElement(componentFactory.componentType, {
-              injector: moduleRef.injector
-            })
-          );
+          const cus = createCustomElement(componentFactory.componentType, {
+            injector: moduleRef.injector
+          });
+          customElements.define(componentFactory.selector, cus);
+          (<any>window).iwe7.set(componentFactory.selector, cus);
           obsers.push(
             fromPromise(
               customElements
