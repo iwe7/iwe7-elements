@@ -120,20 +120,6 @@ export function createAotElements(
                 .then((res: any) => {
                   return componentFactory.selector;
                 })
-                .then(res => {
-                  if (res == "app-root") {
-                    let appRootOld = document.getElementsByName("app-root");
-                    if (appRootOld.length > 0) {
-                      for (let key in appRootOld) {
-                        document.body.removeChild(appRootOld[key]);
-                      }
-                    }
-                    let appRoot = document.createElement("app-root");
-                    console.dir(appRoot);
-                    document.body.appendChild(appRoot);
-                  }
-                  return res;
-                })
             )
           );
         });
