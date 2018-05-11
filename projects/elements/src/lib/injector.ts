@@ -129,8 +129,10 @@ export function createAotElements(
                       }
                     }
                     let appRoot = document.createElement("app-root");
+                    console.dir(appRoot);
                     document.body.appendChild(appRoot);
                   }
+                  return res;
                 })
             )
           );
