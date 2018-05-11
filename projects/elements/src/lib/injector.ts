@@ -17,11 +17,12 @@ import {
 } from "@angular/platform-browser";
 
 import { fromPromise } from "rxjs/observable/fromPromise";
-import { forkJoin } from "rxjs";
+import { forkJoin, Subject } from "rxjs";
 initDomAdapter();
 
 // 定义全局对象
 (<any>window).iwe7 = (<any>window).iwe7 || new Map();
+(<any>window).loadModules$ = new Subject();
 
 export class ElementInjector implements Injector {
   get(token: any, notFoundValue?: any): any {
