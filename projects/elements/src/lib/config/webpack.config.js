@@ -80,11 +80,9 @@ module.exports = {
       name: true,
       cacheGroups: {
         commons: {
-          commons: {
-            test: /[\\/]node_modules[\\/]/,
-            name: "vendor",
-            chunks: "all"
-          }
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+          chunks: "all"
         }
       }
     }
