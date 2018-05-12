@@ -113,9 +113,7 @@ function createIndexHtml(source, out) {
 <body>
 <app-root></app-root>
 <script src="./polyfills.js?t=${time}"></script>
-<script src="./rxjs.js?t=${time}"></script>
 <script src="./vendor.js?t=${time}"></script>
-<script src="./iwe7Element.js?t=${time}"></script>
 <script src="./app.js?t=${time}"></script>
 </body>
 

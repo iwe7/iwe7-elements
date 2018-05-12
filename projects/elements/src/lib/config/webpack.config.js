@@ -17,18 +17,7 @@ module.exports = {
   entry: {
     app: "./.tmp/src/app/element.app.js",
     ...entrys,
-    angular: [
-      "@angular/core",
-      "@angular/platform-browser",
-      "@angular/common",
-      "@angular/common/http",
-      "@angular/router",
-      "@angular/elements",
-      "@angular/forms"
-    ],
-    polyfills: ["./.tmp/src/polyfills.js"],
-    iwe7Element: ["iwe7-elements"],
-    rxjs: ["rxjs"]
+    polyfills: ["./.tmp/src/polyfills.js"]
   },
   target: "web",
   output: {
