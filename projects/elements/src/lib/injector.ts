@@ -95,3 +95,5 @@ export function createAotElements(
   });
   (<any>window).ElementsLoad = forkJoin(...obsers);
 }
+
+(<any>window).createAotElements = createAotElements;
