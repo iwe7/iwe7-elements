@@ -1,6 +1,6 @@
 {
   "name": "iwe7-elements",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "bin": {
     "iwe7": "src/lib/cli.js"
   },
