@@ -77,7 +77,7 @@ module.exports = webpack = ({
   entrysContent += `};`;
   fs.writeFileSync(source + "/entrys/index.js", entrysContent);
   let cmd = `${source}/node_modules/.bin/webpack -p `;
-  let tmp = `cp -rf ${source}/src/app/ ${source}/.tpm/src/app/`;
+  let tmp = `cp -rf ${source}/src/app/ ${source}/.tmp/src/app/`;
   exec(tmp, (err) => {
     if (err) {
       console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
