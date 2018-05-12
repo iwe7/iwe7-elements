@@ -74,7 +74,7 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
     if (err) {
       console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
     } else {
-      exec("rm -rf " + source + "/.tmp");
+      // exec("rm -rf " + source + "/.tmp");
     }
   });
 };
