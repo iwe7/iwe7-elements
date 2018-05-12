@@ -1,4 +1,6 @@
-let { exec } = require("child_process");
+let {
+  exec
+} = require("child_process");
 let path = require("path");
 let glob = require("glob");
 
@@ -12,7 +14,12 @@ function ucFirst(word) {
 
 let webpackConfig = fs.readFileSync(basePath + "/../config/webpack.config.js");
 
-module.exports = webpack = ({ source, pre, out, isMain }) => {
+module.exports = webpack = ({
+  source,
+  pre,
+  out,
+  isMain
+}) => {
   fs.mkdir(source + "/" + out, () => {
     console.log("begin");
   });
@@ -41,7 +48,7 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
     let pathName = pathArrs[pathArrs.length - 1];
     let moduleName = pathName.replace(".module.ts", "");
     if (moduleName === "app") {
-      return ;
+      return;
     }
     // 转换-
     moduleNames = moduleName.split("-");
@@ -70,12 +77,18 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
   entrysContent += `};`;
   fs.writeFileSync(source + "/entrys/index.js", entrysContent);
   let cmd = `${source}/node_modules/.bin/webpack -p `;
-  exec(cmd, err => {
+  let tmp = `cp -rf ${source}/src/app/ ${source}/.tpm/src/app/`;
+  exec(tmp, (err) => {
     if (err) {
       console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
-    } else {
-      // exec("rm -rf " + source + "/.tmp");
     }
+    exec(cmd, err => {
+      if (err) {
+        console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
+      } else {
+        // exec("rm -rf " + source + "/.tmp");
+      }
+    });
   });
 };
 

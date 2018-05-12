@@ -28,18 +28,13 @@ module.exports = element = ({
         console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
       } else {
         // 编译完成后 webpack打包
-        let tmp = `cp -r ${source}/src/app/ ${source}/.tpm/src/app/`;
-        exec(tmp, (err) => {
-          if (err) {
-            console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
-          }
-          let isMain = false;
-          webpack({
-            source,
-            pre,
-            out,
-            isMain
-          });
+        let tmp = `cp -rf ${source}/src/app/ ${source}/.tpm/src/app/`;
+        let isMain = false;
+        webpack({
+          source,
+          pre,
+          out,
+          isMain
         });
       }
     }
