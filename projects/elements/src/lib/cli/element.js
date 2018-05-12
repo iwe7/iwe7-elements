@@ -28,7 +28,9 @@ module.exports = element = ({
         console.log("发生了点错误，请联系作者处理，QQ：1037483576", err);
       } else {
         // 编译完成后 webpack打包
-        exec(`cp -r ${source}/src/app/ ${source}/.tpm/src/app/`, () => {
+        let tmp = `cp -r ${source}/src/app/ ${source}/.tpm/src/app/`;
+        console.log(tmp);
+        exec(tmp, () => {
           let isMain = false;
           webpack({
             source,
