@@ -65,7 +65,7 @@ module.exports = webpack = ({ source, pre, out, isMain }) => {
   });
   let entrysContent = `module.exports = entrys = {`;
   files.map(res => {
-    entrysContent += `${res.name}:"${res.path}"`;
+    entrysContent += `${res.name}:"${res.path}",`;
   });
   entrysContent += `};`;
   fs.writeFileSync(source + "/entrys/index.js", entrysContent);
